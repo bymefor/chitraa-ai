@@ -1,0 +1,1249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chitraa AI — Study Diagrams</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Noto+Sans+Devanagari:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:#07090f;
+  --bg2:#0e1120;
+  --bg3:#141828;
+  --card:#181d2e;
+  --card2:#1e2438;
+  --b1:rgba(255,255,255,0.06);
+  --b2:rgba(255,255,255,0.11);
+  --b3:rgba(255,255,255,0.18);
+  --text:#eef0f8;
+  --muted:#6b7494;
+  --muted2:#8e99bc;
+  --accent:#7c6dfa;
+  --accent2:#06d6a0;
+  --accent3:#ff6b6b;
+  --gold:#ffd166;
+  --math-c:#a78bfa;
+  --sci-c:#34d399;
+  --sst-c:#fb923c;
+  --eng-c:#60a5fa;
+  --f:'Plus Jakarta Sans',sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--f);min-height:100vh;overflow-x:hidden}
+
+/* animated bg blobs */
+.blob{position:fixed;border-radius:50%;filter:blur(80px);opacity:.18;pointer-events:none;z-index:0;animation:drift 12s ease-in-out infinite alternate}
+.blob1{width:500px;height:500px;background:#7c6dfa;top:-100px;left:-150px;animation-delay:0s}
+.blob2{width:400px;height:400px;background:#06d6a0;bottom:-100px;right:-100px;animation-delay:-4s}
+.blob3{width:300px;height:300px;background:#ff6b6b;top:40%;right:20%;animation-delay:-8s}
+@keyframes drift{0%{transform:translate(0,0) scale(1)}100%{transform:translate(30px,20px) scale(1.05)}}
+
+.wrap{max-width:920px;margin:0 auto;padding:0 20px;position:relative;z-index:1}
+
+/* ── HEADER ── */
+header{padding:18px 0;border-bottom:1px solid var(--b1);position:sticky;top:0;z-index:100;background:rgba(7,9,15,.85);backdrop-filter:blur(16px)}
+.hdr{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+.logo-name{font-size:22px;font-weight:800;background:linear-gradient(135deg,#fff 30%,var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;letter-spacing:-.3px}
+.logo-tag{font-size:10px;color:var(--muted);letter-spacing:.4px}
+.hdr-right{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.lang-toggle{display:flex;gap:4px;background:var(--bg3);border:1px solid var(--b2);padding:3px;border-radius:8px}
+.lang-btn{padding:4px 12px;border-radius:6px;font-size:12px;font-weight:600;cursor:pointer;border:none;background:transparent;color:var(--muted);transition:all .2s;font-family:var(--f)}
+.lang-btn.active{background:var(--accent);color:#fff}
+
+
+
+
+/* ── HERO ── */
+.hero{text-align:center;padding:52px 0 40px}
+.hero-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(124,109,250,.12);border:1px solid rgba(124,109,250,.28);padding:5px 15px;border-radius:99px;font-size:12px;color:#a78bfa;margin-bottom:20px;font-weight:500}
+.hero h1{font-size:clamp(28px,5.5vw,50px);font-weight:800;line-height:1.12;margin-bottom:14px;letter-spacing:-.5px}
+.hl{background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-sub{font-size:16px;color:var(--muted2);max-width:500px;margin:0 auto 8px;line-height:1.65}
+.hero-free{display:inline-flex;align-items:center;gap:5px;font-size:12px;color:var(--accent2);font-weight:600;margin-top:8px;background:rgba(6,214,160,.08);padding:4px 12px;border-radius:99px;border:1px solid rgba(6,214,160,.2)}
+
+/* ── SUBJECT TABS ── */
+.subject-tabs{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin-bottom:22px}
+.sub-tab{display:flex;align-items:center;gap:6px;padding:8px 18px;border-radius:99px;border:1.5px solid var(--b2);background:var(--bg3);font-size:13px;font-weight:600;cursor:pointer;transition:all .2s;color:var(--muted);font-family:var(--f)}
+.sub-tab:hover{color:var(--text);background:var(--card)}
+.sub-tab.active[data-sub="math"]   {border-color:var(--math-c);color:var(--math-c);background:rgba(167,139,250,.08)}
+.sub-tab.active[data-sub="science"]{border-color:var(--sci-c);color:var(--sci-c);background:rgba(52,211,153,.08)}
+.sub-tab.active[data-sub="sst"]    {border-color:var(--sst-c);color:var(--sst-c);background:rgba(251,146,60,.08)}
+.sub-tab.active[data-sub="english"]{border-color:var(--eng-c);color:var(--eng-c);background:rgba(96,165,250,.08)}
+
+/* ── INPUT CARD ── */
+.input-card{background:var(--card);border:1px solid var(--b2);border-radius:20px;padding:22px;margin-bottom:22px}
+.input-row{display:flex;gap:10px;align-items:flex-end}
+.q-wrap{flex:1;position:relative}
+textarea#q{width:100%;background:var(--bg2);border:1px solid var(--b2);color:var(--text);font-family:var(--f);font-size:15px;padding:13px 46px 13px 15px;border-radius:12px;outline:none;resize:none;line-height:1.55;min-height:52px;max-height:150px;transition:border-color .2s}
+textarea#q::placeholder{color:var(--muted)}
+textarea#q:focus{border-color:var(--accent)}
+.mic-btn{position:absolute;right:11px;bottom:11px;width:30px;height:30px;background:var(--bg3);border:1px solid var(--b2);border-radius:8px;color:var(--muted);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;font-size:15px}
+.mic-btn:hover{background:var(--accent);color:#fff;border-color:var(--accent)}
+.mic-btn.rec{background:var(--accent3);color:#fff;border-color:var(--accent3);animation:pulseRec 1s infinite}
+@keyframes pulseRec{0%,100%{box-shadow:0 0 0 0 rgba(255,107,107,.4)}50%{box-shadow:0 0 0 8px rgba(255,107,107,0)}}
+.gen-btn{flex-shrink:0;padding:0 24px;background:linear-gradient(135deg,var(--accent),#5a4fd8);color:#fff;font-family:var(--f);font-size:14px;font-weight:700;border:none;border-radius:12px;cursor:pointer;transition:all .2s;height:52px;display:flex;align-items:center;gap:8px;white-space:nowrap}
+.gen-btn:hover{transform:translateY(-1px);box-shadow:0 8px 28px rgba(124,109,250,.4)}
+.gen-btn:active{transform:translateY(0)}
+.gen-btn:disabled{opacity:.55;cursor:not-allowed;transform:none;box-shadow:none}
+.gen-btn .spin{width:15px;height:15px;border:2px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:sp .65s linear infinite;display:none}
+@keyframes sp{to{transform:rotate(360deg)}}
+.gen-btn.loading .spin{display:block}
+.gen-btn.loading .btxt{display:none}
+
+/* type chips + tips */
+.chips-row{display:flex;gap:7px;flex-wrap:wrap;margin-top:13px}
+.chip{display:flex;align-items:center;gap:4px;padding:5px 13px;border-radius:99px;font-size:12px;font-weight:500;background:var(--bg2);border:1px solid var(--b1);color:var(--muted);cursor:pointer;transition:all .2s;font-family:var(--f)}
+
+
+
+@media(max-width:600px){.input-row{flex-direction:column}.gen-btn{width:100%;justify-content:center}h1{font-size:26px}.hdr-right{gap:6px}}
+.chip:hover{border-color:var(--b2);color:var(--text)}
+.chip.active{border-color:var(--accent2);color:var(--accent2);background:rgba(6,214,160,.07)}
+.tips-row{display:flex;gap:7px;flex-wrap:wrap;margin-top:11px}
+.tip{font-size:12px;padding:5px 12px;background:var(--bg3);border:1px solid var(--b1);border-radius:99px;color:var(--muted);cursor:pointer;transition:all .2s;font-weight:500}
+.tip:hover{color:var(--text);border-color:var(--b2)}
+
+.err-box{background:rgba(255,107,107,.07);border:1px solid rgba(255,107,107,.22);border-radius:10px;padding:12px 15px;font-size:13px;color:var(--accent3);display:none;margin-top:12px;line-height:1.5}
+
+/* ── RESULT ── */
+#result-sec{display:none;margin-bottom:26px;animation:fadeIn .4s ease}
+.res-card{background:var(--card);border:1px solid var(--b2);border-radius:20px;overflow:hidden}
+.res-hdr{padding:15px 20px 13px;border-bottom:1px solid var(--b1);display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.res-title{font-size:14px;font-weight:600;flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.res-badge{font-size:11px;padding:3px 11px;border-radius:99px;font-weight:600;flex-shrink:0}
+.res-body{padding:22px}
+
+/* loading */
+.ld-overlay{display:none;flex-direction:column;align-items:center;justify-content:center;padding:44px 24px;gap:14px;min-height:320px}
+/* Cooking pot animation */
+.cook-wrap{position:relative;width:120px;height:120px;margin-bottom:8px}
+.cook-pot{position:absolute;bottom:0;left:50%;transform:translateX(-50%)}
+.cook-steam{position:absolute;display:flex;gap:10px;bottom:82px;left:50%;transform:translateX(-50%)}
+.steam-line{width:4px;height:28px;background:linear-gradient(to top,var(--accent),transparent);border-radius:4px;animation:steamUp 1.4s ease-in-out infinite}
+.steam-line:nth-child(2){animation-delay:.25s;height:22px}
+.steam-line:nth-child(3){animation-delay:.5s;height:26px}
+.steam-line:nth-child(4){animation-delay:.15s;height:20px}
+.steam-line:nth-child(5){animation-delay:.4s;height:24px}
+@keyframes steamUp{0%{transform:translateY(0) scaleX(1);opacity:.9}50%{transform:translateY(-16px) scaleX(1.4);opacity:.5}100%{transform:translateY(-30px) scaleX(.6);opacity:0}}
+.cook-bounce{animation:potBounce 1.2s ease-in-out infinite}
+@keyframes potBounce{0%,100%{transform:translateX(-50%) rotate(-2deg)}50%{transform:translateX(-50%) rotate(2deg)}}
+/* Dots loader */
+.cook-dots{display:flex;gap:8px;margin-top:4px}
+.cook-dot{width:8px;height:8px;border-radius:50%;background:var(--accent);animation:dotPulse 1.2s ease-in-out infinite}
+.cook-dot:nth-child(2){animation-delay:.2s;background:var(--accent2)}
+.cook-dot:nth-child(3){animation-delay:.4s;background:var(--accent3)}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+@keyframes dotPulse{0%,100%{transform:scale(.7);opacity:.4}50%{transform:scale(1.2);opacity:1}}
+/* Text */
+.ld-main{font-size:20px;font-weight:800;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;letter-spacing:-.3px}
+.ld-txt{font-size:13px;color:var(--muted2);font-weight:500;min-height:20px;transition:opacity .3s}
+.ld-sub{font-size:12px;color:var(--accent);font-weight:600;min-height:18px}
+.ld-steps{display:flex;gap:6px;margin-top:4px}
+.ld-step{width:6px;height:6px;border-radius:50%;background:var(--b2);transition:background .3s}
+.ld-step.active{background:var(--accent)}
+
+/* svg output */
+#svg-out{display:none;background:transparent;border-radius:14px;overflow:hidden;box-shadow:0 8px 40px rgba(0,0,0,0.3);border:1px solid var(--b2)}
+#svg-out svg{width:100%;height:auto;display:block;border-radius:14px}
+#hf-img-wrap{display:none;margin-bottom:14px;border-radius:14px;overflow:hidden;box-shadow:0 8px 40px rgba(0,0,0,0.35);border:1px solid var(--b2)}
+#hf-img-wrap img{width:100%;height:auto;display:block;border-radius:14px}
+#hf-loading{display:none;align-items:center;gap:10px;padding:14px 16px;background:var(--bg3);border-radius:12px;border:1px solid var(--b1);margin-bottom:14px;font-size:13px;color:var(--accent2)}
+#hf-loading .hf-spin{width:16px;height:16px;border:2px solid rgba(6,214,160,.3);border-top-color:var(--accent2);border-radius:50%;animation:sp .7s linear infinite;flex-shrink:0}
+.mode-bar{display:flex;gap:6px;padding:4px;background:var(--bg3);border:1px solid var(--b1);border-radius:12px;margin-bottom:13px}
+.mbar-btn{flex:1;padding:8px 6px;border-radius:9px;border:none;font-family:var(--f);font-size:12px;font-weight:600;cursor:pointer;background:transparent;color:var(--muted);transition:all .22s;display:flex;align-items:center;justify-content:center;gap:5px}
+.mbar-btn.active{color:#fff;box-shadow:0 2px 10px rgba(0,0,0,.25)}
+.mbar-btn[data-m="both"].active{background:linear-gradient(135deg,var(--accent),var(--accent2))}
+.mbar-btn[data-m="diagram"].active{background:linear-gradient(135deg,#7c6dfa,#5a4fd8)}
+.mbar-btn[data-m="image"].active{background:linear-gradient(135deg,#06d6a0,#0984e3)}
+.svg-prompt{font-size:11px;color:var(--muted);margin-top:10px;line-height:1.55;font-style:italic;border-left:2px solid var(--b2);padding-left:10px}
+
+/* explanation */
+.expl-card{background:var(--bg3);border:1px solid var(--b1);border-radius:12px;padding:15px 18px;margin-top:16px;font-size:14px;line-height:1.78;color:#a8b4d4;display:none}
+.expl-card h4{font-size:11px;color:var(--muted);margin-bottom:7px;text-transform:uppercase;letter-spacing:.5px;font-weight:600}
+
+/* actions */
+.res-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
+.act-btn{display:flex;align-items:center;gap:6px;padding:8px 16px;background:var(--bg2);border:1px solid var(--b2);color:var(--text);font-family:var(--f);font-size:13px;font-weight:500;border-radius:9px;cursor:pointer;transition:all .2s}
+.act-btn:hover{background:var(--bg3);border-color:var(--accent);color:var(--accent)}
+.act-dl{background:rgba(6,214,160,.08)!important;border-color:var(--accent2)!important;color:var(--accent2)!important}
+.act-dl:hover{background:rgba(6,214,160,.16)!important}
+
+/* ── HISTORY ── */
+.hist-sec{margin-bottom:48px}
+.sec-title{font-size:12px;font-weight:700;color:var(--muted);letter-spacing:.6px;text-transform:uppercase;margin-bottom:13px}
+.hist-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:10px}
+.hc{background:var(--card);border:1px solid var(--b1);border-radius:13px;padding:12px;cursor:pointer;transition:all .2s}
+.hc:hover{border-color:var(--b2);transform:translateY(-2px)}
+.hc-thumb{width:100%;aspect-ratio:1;background:var(--bg2);border-radius:8px;margin-bottom:9px;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.hc-thumb svg{width:100%;height:100%}
+.hc-thumb .no-svg{font-size:26px}
+.hc-q{font-size:11px;color:var(--text);font-weight:500;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;line-height:1.45}
+.hc-meta{font-size:10px;color:var(--muted);margin-top:5px;display:flex;align-items:center;gap:5px}
+.hc-dot{width:5px;height:5px;border-radius:50%}
+
+footer{border-top:1px solid var(--b1);padding:18px 0;text-align:center;font-size:12px;color:var(--muted)}
+
+@media(max-width:560px){
+  .input-row{flex-direction:column}
+  .gen-btn{width:100%;justify-content:center}
+  h1{font-size:26px}
+  .hdr-right{gap:6px}
+}
+</style>
+</head>
+<body>
+
+<div class="blob blob1"></div>
+<div class="blob blob2"></div>
+<div class="blob blob3"></div>
+
+
+  </div>
+</div>
+
+<header>
+  <div class="wrap">
+    <div class="hdr">
+      <a class="logo" href="#">
+        <div class="logo-name">Chitraa <span style="font-size:14px;font-weight:600;opacity:.75">AI</span></div>
+        <div class="logo-tag">AI Study Diagrams · Groq + FLUX</div>
+      </a>
+      <div class="hdr-right">
+        <div class="lang-toggle">
+          <button class="lang-btn active" data-lang="en" onclick="setLang('en')">English</button>
+          <button class="lang-btn" data-lang="hi" onclick="setLang('hi')">हिन्दी</button>
+        </div>
+<div style="font-size:11px;color:var(--accent2);font-weight:600;padding:4px 12px;background:rgba(6,214,160,0.1);border:1px solid rgba(6,214,160,0.2);border-radius:8px;">⚡ Groq + HuggingFace FLUX</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+<div class="wrap">
+
+  <div class="hero">
+    <div class="hero-badge">✨ Groq Diagrams · HuggingFace FLUX Images · Live Web Search</div>
+    <h1 id="hero-h">Turn any question into a<br><span class="hl">beautiful diagram</span></h1>
+    <p class="hero-sub" id="hero-p">Water cycles, maths solutions, historical timelines — get stunning AI-generated SVG diagrams instantly.</p>
+  </div>
+
+  <div class="subject-tabs">
+    <button class="sub-tab active" data-sub="math"    onclick="setSub('math')">🔢 Maths</button>
+    <button class="sub-tab"        data-sub="science" onclick="setSub('science')">🧪 Science</button>
+    <button class="sub-tab"        data-sub="sst"     onclick="setSub('sst')">🌍 SST</button>
+    <button class="sub-tab"        data-sub="english" onclick="setSub('english')">📖 English</button>
+  </div>
+
+  <div class="input-card">
+    <div class="input-row">
+      <div class="q-wrap">
+        <textarea id="q" rows="1" placeholder="Type your question or topic…" oninput="autoR(this)"></textarea>
+        <button class="mic-btn" id="mic-btn" onclick="toggleMic()" title="Voice input">🎤</button>
+      </div>
+      <button class="gen-btn" id="gen-btn" onclick="generate()">
+        <div class="spin"></div>
+        <span class="btxt" id="btxt">⚡ Generate</span>
+      </button>
+    </div>
+
+    <div class="mode-bar">
+      <button class="mbar-btn active" data-m="both"    onclick="setMode('both')">✨ Best of Both</button>
+      <button class="mbar-btn"        data-m="diagram" onclick="setMode('diagram')">📊 Diagram Only</button>
+      <button class="mbar-btn"        data-m="image"   onclick="setMode('image')">🎨 AI Image Only</button>
+    </div>
+    <div class="chips-row">
+      <button class="chip active" data-type="diagram"  onclick="setType('diagram')">📊 Diagram</button>
+      <button class="chip"        data-type="steps"    onclick="setType('steps')">🔢 Step-by-Step</button>
+      <button class="chip"        data-type="concept"  onclick="setType('concept')">💡 Concept Map</button>
+      <button class="chip"        data-type="timeline" onclick="setType('timeline')">📅 Timeline</button>
+      <button class="chip"        data-type="cycle"    onclick="setType('cycle')">🔄 Cycle</button>
+    </div>
+
+    <div class="tips-row" id="tips-row">
+      <span class="tip" onclick="useTip('Water cycle')">Water cycle</span>
+      <span class="tip" onclick="useTip('Solve: 2x + 5 = 15')">Solve 2x+5=15</span>
+      <span class="tip" onclick="useTip('Photosynthesis process')">Photosynthesis</span>
+      <span class="tip" onclick="useTip('French Revolution timeline')">French Revolution</span>
+      <span class="tip" onclick="useTip('Human heart parts')">Human heart</span>
+      <span class="tip" onclick="useTip('Pythagorean theorem proof')">Pythagoras</span>
+    </div>
+
+    <div class="err-box" id="err-box"></div>
+  </div>
+
+  <!-- RESULT -->
+  <div id="result-sec">
+    <div class="res-card">
+      <div class="res-hdr">
+        <span class="res-title" id="res-title">—</span>
+        <span class="res-badge" id="res-badge"></span>
+      </div>
+      <div class="res-body">
+        <div class="ld-overlay" id="ld">
+          <div class="cook-wrap">
+            <div class="cook-steam">
+              <div class="steam-line"></div>
+              <div class="steam-line"></div>
+              <div class="steam-line"></div>
+              <div class="steam-line"></div>
+              <div class="steam-line"></div>
+            </div>
+            <svg class="cook-pot cook-bounce" width="100" height="90" viewBox="0 0 100 90" xmlns="http://www.w3.org/2000/svg">
+              <!-- flames -->
+              <ellipse cx="30" cy="82" rx="10" ry="5" fill="#fdcb6e"/>
+              <ellipse cx="50" cy="84" rx="13" ry="5" fill="#e17055"/>
+              <ellipse cx="70" cy="82" rx="10" ry="5" fill="#fdcb6e"/>
+              <ellipse cx="30" cy="78" rx="7" ry="5" fill="#f9ca24"/>
+              <ellipse cx="50" cy="79" rx="9" ry="6" fill="#fff3cd"/>
+              <ellipse cx="70" cy="78" rx="7" ry="5" fill="#f9ca24"/>
+              <!-- pot body -->
+              <rect x="8" y="30" width="84" height="50" rx="14" fill="#3a4275" stroke="#7c6dfa" stroke-width="2"/>
+              <!-- lid -->
+              <rect x="4" y="20" width="92" height="14" rx="7" fill="#454880" stroke="#7c6dfa" stroke-width="1.5"/>
+              <!-- lid handle -->
+              <rect x="38" y="10" width="24" height="12" rx="6" fill="#7c6dfa"/>
+              <!-- side handles -->
+              <rect x="0" y="36" width="10" height="10" rx="5" fill="#2d3561" stroke="#7c6dfa" stroke-width="1.5"/>
+              <rect x="90" y="36" width="10" height="10" rx="5" fill="#2d3561" stroke="#7c6dfa" stroke-width="1.5"/>
+              <!-- shine -->
+              <rect x="18" y="36" width="4" height="22" rx="2" fill="white" opacity="0.12"/>
+              <!-- bubbles -->
+              <circle cx="35" cy="50" r="5" fill="#06d6a0" opacity="0.8"/>
+              <circle cx="55" cy="44" r="6" fill="#7c6dfa" opacity="0.7"/>
+              <circle cx="70" cy="52" r="4" fill="#ff6b6b" opacity="0.8"/>
+            </svg>
+          </div>
+          <div class="ld-main">Chitraa AI is Cooking… 👨‍🍳</div>
+          <div class="cook-dots">
+            <div class="cook-dot"></div>
+            <div class="cook-dot"></div>
+            <div class="cook-dot"></div>
+          </div>
+          <div class="ld-txt" id="ld-txt">Searching the web for your topic…</div>
+          <div class="ld-sub" id="ld-sub">Getting fresh data from Wikipedia</div>
+        </div>
+        <div id="hf-loading"><div class="hf-spin"></div><span id="hf-load-txt">Generating AI illustration…</span></div>
+        <div id="hf-img-wrap"><img id="hf-img" src="" alt="AI illustration"/></div>
+        <div id="search-badge"  style="display:none;align-items:center;gap:6px;font-size:11px;color:var(--accent2);background:rgba(6,214,160,0.08);border:1px solid rgba(6,214,160,0.2);border-radius:8px;padding:5px 12px;margin-bottom:10px;">🌐 <span>Live web data used — diagram reflects latest information</span></div>
+        <div id="svg-out"></div>
+        <div class="expl-card" id="expl-card">
+          <h4 id="expl-lbl">Explanation</h4>
+          <div id="expl-txt"></div>
+        </div>
+        <div class="res-actions" id="res-acts" style="display:none">
+          <button class="act-btn act-dl" id="dl-img-btn" style="display:none" onclick="dlHFImg()">🖼️ Download Image</button>
+          <button class="act-btn act-dl" onclick="dlSVG()">⬇️ Download SVG</button>
+          <button class="act-btn act-dl" onclick="dlPNG()">🖼️ PNG</button>
+          <button class="act-btn" onclick="regen()">🔄 Regenerate</button>
+          <button class="act-btn" onclick="followUp()">💬 Follow-up</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- HISTORY -->
+  <div class="hist-sec" id="hist-sec" style="display:none">
+    <div class="sec-title" id="hist-lbl">Recent Diagrams</div>
+    <div class="hist-grid" id="hist-grid"></div>
+  </div>
+
+</div>
+</main>
+
+<footer>
+  <div class="wrap" style="display:flex;flex-direction:column;align-items:center;gap:8px;"><span style="color:var(--muted)">Made with ❤️ for students in India</span><div style="margin-top:4px;padding:6px 22px;background:linear-gradient(135deg,var(--accent),var(--accent2));border-radius:99px;font-size:13px;font-weight:700;color:#fff;letter-spacing:.3px">✦ By Munish Mishra ✦</div></div>
+</footer>
+
+<script>
+// ══════════════════════════════════════════
+// CHITRAA AI — by Munish Mishra
+// Step 1: Paste your Groq key below  → get free key at console.groq.com
+// Step 2: Paste your HuggingFace key → get free key at huggingface.co/settings/tokens
+// ══════════════════════════════════════════
+const GROQ_KEY = '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';
+const HF_KEY   = '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';
+
+// ── STATE ──
+let lang='en', sub='math', vtype='diagram';
+let lastQ='', lastSVG='', lastExpl='', lastHFImg='', vmode='both';
+let isRec=false, recog=null;
+const hist=[];
+
+// ── TRANSLATIONS ──
+const T={
+  en:{
+    h:'Turn any question into a<br><span class="hl">beautiful diagram</span>',
+    p:'Water cycles, maths solutions, historical timelines — get stunning AI-generated SVG diagrams instantly.',
+    ph:'Type your question or topic…',
+    btn:'⚡ Generate',
+    expl:'Explanation',
+    histL:'Recent Diagrams',
+    tips:['Water cycle','Solve 2x+5=15','Photosynthesis','French Revolution','Human heart','Pythagoras'],
+    tipV:['Water cycle','Solve: 2x + 5 = 15','Photosynthesis process','French Revolution timeline','Human heart parts','Pythagorean theorem proof'],
+    ld:['Searching the web for your topic…','Mixing colors and shapes…','Drawing your diagram…','Adding finishing touches…','Almost ready to serve! 🍽️'],
+    ls:['Getting fresh data from Wikipedia','Choosing the perfect art style','Painting labels and arrows','Polishing every detail…','Almost on the plate!'],
+    noQ:'Please type a question first!'
+  },
+  hi:{
+    h:'कोई भी सवाल पूछो — पाओ एक<br><span class="hl">सुंदर चित्र</span>',
+    p:'जल चक्र, गणित, इतिहास — तुरंत AI चित्र पाओ।',
+    ph:'अपना प्रश्न या विषय लिखें…',
+    btn:'⚡ चित्र बनाओ',
+    expl:'स्पष्टीकरण',
+    histL:'हाल के चित्र',
+    tips:['जल चक्र','2x+5=15 हल करें','प्रकाश संश्लेषण','फ्रेंच क्रांति','मानव हृदय','पाइथागोरस'],
+    tipV:['Water cycle','Solve: 2x + 5 = 15','Photosynthesis process','French Revolution timeline','Human heart parts','Pythagorean theorem proof'],
+    ld:['वेब से जानकारी खोज रहे हैं…','रंग और आकार मिला रहे हैं…','चित्र बना रहे हैं…','अंतिम स्पर्श दे रहे हैं…','आपका चित्र तैयार हो रहा है!'],
+    ls:['Wikipedia से ताज़ा डेटा मिल रहा है','सही कला शैली चुन रहे हैं','लेबल और तीर लगाए जा रहे हैं','हर विवरण को निखार रहे हैं…','बस थोड़ा और इंतज़ार!'],
+    noQ:'कृपया पहले प्रश्न लिखें!'
+  }
+};
+
+// ── API KEY ──
+function updateKeyStatus(){} // no-op — backend handles auth
+
+// ── LANG ──
+function setLang(l){
+  lang=l;
+  document.querySelectorAll('.lang-btn').forEach(b=>b.classList.toggle('active',b.dataset.lang===l));
+  const t=T[l];
+  document.getElementById('hero-h').innerHTML=t.h;
+  document.getElementById('hero-p').textContent=t.p;
+  document.getElementById('q').placeholder=t.ph;
+  document.getElementById('btxt').textContent=t.btn;
+  document.getElementById('expl-lbl').textContent=t.expl;
+  document.getElementById('hist-lbl').textContent=t.histL;
+  const tips=document.querySelectorAll('.tip');
+  t.tips.forEach((tx,i)=>{if(tips[i])tips[i].textContent=tx});
+  document.body.style.fontFamily=l==='hi'?"'Noto Sans Devanagari','Plus Jakarta Sans',sans-serif":"'Plus Jakarta Sans',sans-serif";
+}
+function setSub(s){
+  sub=s;
+  document.querySelectorAll('.sub-tab').forEach(b=>b.classList.toggle('active',b.dataset.sub===s));
+}
+function setType(tp){
+  vtype=tp;
+  document.querySelectorAll('.chip').forEach(b=>b.classList.toggle('active',b.dataset.type===tp));
+}
+function setMode(m){
+  vmode=m;
+  document.querySelectorAll('.mbar-btn').forEach(b=>b.classList.toggle('active',b.dataset.m===m));
+  const cr=document.querySelector('.chips-row');
+  cr.style.opacity=m==='image'?.4:1;
+  cr.style.pointerEvents=m==='image'?'none':'auto';
+}
+function useTip(tx){
+  document.getElementById('q').value=tx;
+  autoR(document.getElementById('q'));
+}
+function autoR(el){el.style.height='auto';el.style.height=Math.min(el.scrollHeight,150)+'px'}
+
+function subColor(s){return{math:'#a78bfa',science:'#34d399',sst:'#fb923c',english:'#60a5fa'}[s]||'#7c6dfa'}
+function subLabel(s){return{math:'🔢 Maths',science:'🧪 Science',sst:'🌍 SST',english:'📖 English'}[s]||s}
+
+// ── GENERATE ──
+async function generate(){
+  const t=T[lang];
+  const q=document.getElementById('q').value.trim();
+  if(!q){showErr(t.noQ);return}
+  lastQ=q; clearErr();
+
+  const btn=document.getElementById('gen-btn');
+  btn.disabled=true; btn.classList.add('loading');
+
+  document.getElementById('result-sec').style.display='block';
+  document.getElementById('search-badge').style.display='none';
+  document.getElementById('hf-img-wrap').style.display='none';
+  document.getElementById('hf-loading').style.display='none';
+  document.getElementById('dl-img-btn').style.display='none';
+  lastHFImg='';
+  document.getElementById('ld').style.display='flex';
+  document.getElementById('svg-out').style.display='none';
+  document.getElementById('expl-card').style.display='none';
+  document.getElementById('res-acts').style.display='none';
+
+  const col=subColor(sub);
+  document.getElementById('res-title').textContent=q.length>55?q.slice(0,55)+'…':q;
+  const badge=document.getElementById('res-badge');
+  badge.textContent=subLabel(sub);
+  badge.style.cssText=`background:${col}18;color:${col};border:1px solid ${col}38;padding:3px 11px;border-radius:99px;font-size:11px;font-weight:600`;
+
+  // loading animation
+  let li=0;
+  document.getElementById('ld-txt').textContent=t.ld[0];
+  document.getElementById('ld-sub').textContent=t.ls[0];
+  // loading dots handled by CSS animation
+  const ldInt=setInterval(()=>{
+    li=(li+1)%5;
+    const ldTxt=document.getElementById('ld-txt');
+    ldTxt.style.opacity='0';
+    setTimeout(()=>{
+      ldTxt.textContent=t.ld[li];
+      document.getElementById('ld-sub').textContent=t.ls[li];
+      ldTxt.style.opacity='1';
+    },200);
+  },2500);
+
+  try{
+    // ── STEP 1: Wikipedia live search (free, no key needed) ──
+    document.getElementById('ld-txt').textContent='Searching web for live data…';
+    let webContext='';
+    try{
+      const wikiQ=encodeURIComponent(q.split(' ').slice(0,4).join(' '));
+      const wR=await fetch(`https://en.wikipedia.org/api/rest_v1/page/summary/${wikiQ}`);
+      if(wR.ok){const wd=await wR.json();if(wd.extract){webContext='\nLIVE WEB DATA:\n'+wd.extract.slice(0,800)+'\n';document.getElementById('search-badge').style.display='flex';}}
+    }catch(_){}
+
+    const doImage   = (vmode==='image'||vmode==='both') && HF_KEY && HF_KEY!=='PASTE_YOUR_HUGGINGFACE_KEY_HERE';
+    const doDiagram = (vmode==='diagram'||vmode==='both') && GROQ_KEY && GROQ_KEY!=='PASTE_YOUR_GROQ_KEY_HERE';
+    if(!doImage && !doDiagram) throw new Error('Please add at least one API key. Open the file in Notepad and fill in GROQ_KEY or HF_KEY.');
+
+    // Hide/reset outputs
+    document.getElementById('hf-img-wrap').style.display='none';
+    document.getElementById('svg-out').style.display='none';
+    document.getElementById('expl-card').style.display='none';
+    document.getElementById('dl-img-btn').style.display='none';
+
+    // ── STEP 2: Hugging Face FLUX image (runs in background, non-blocking) ──
+    let hfPromise = Promise.resolve();
+    if(doImage){
+      document.getElementById('hf-loading').style.display='flex';
+      document.getElementById('hf-load-txt').textContent='Painting AI illustration with FLUX…';
+      const artStyle={
+        math:'mathematical educational diagram, clean white background, geometric shapes, equations, textbook illustration style, colorful and clear',
+        science:'scientific educational illustration, detailed biology diagram, colorful, labeled, educational poster style',
+        sst:'historical infographic, geography educational poster, colorful, detailed, informative, map style',
+        english:'literary educational illustration, creative poster, vibrant colors, artistic'
+      }[sub]||'educational illustration, detailed, colorful, informative, textbook style';
+      const wikiSnip=webContext?webContext.replace(/\n/g,' ').slice(0,150):'';
+      const hfPromptText=`Educational illustration: ${q}. ${wikiSnip} ${artStyle}. High quality, detailed, vibrant colors, suitable for school students, professional educational poster`;
+      hfPromise = fetch('https://api-inference.huggingface.co/models/black-forest-labs/FLUX.1-schnell',{
+        method:'POST',
+        headers:{'Authorization':'Bearer '+HF_KEY,'Content-Type':'application/json','x-wait-for-model':'true'},
+        body:JSON.stringify({inputs:hfPromptText,parameters:{width:896,height:512,num_inference_steps:4,guidance_scale:0}})
+      }).then(async r=>{
+        if(!r.ok) throw new Error('HF error '+r.status);
+        const blob=await r.blob();
+        const url=URL.createObjectURL(blob);
+        lastHFImg=url;
+        document.getElementById('hf-img').src=url;
+        document.getElementById('hf-img-wrap').style.display='block';
+        document.getElementById('hf-loading').style.display='none';
+        document.getElementById('dl-img-btn').style.display='flex';
+      }).catch(e=>{
+        document.getElementById('hf-loading').style.display='none';
+        console.warn('HF image failed:',e.message);
+      });
+    }
+
+    // ── STEP 3: Groq SVG diagram with auto-fallback models ──
+    if(doDiagram){
+      // All currently active FREE Groq models — auto-tries next if rate limited
+      const MODELS = [
+        'llama-3.3-70b-versatile',   // best quality — 100k TPD free
+        'llama3-70b-8192',           // backup — 6k TPM free
+        'mixtral-8x7b-32768',        // backup — 5k TPM free
+        'llama3-8b-8192',            // fastest backup — 30k TPM free
+        'llama-3.1-8b-instant'       // last resort — fast and free
+      ];
+      const sysMsg = 'You are Chitraa AI — expert SVG educational diagram artist. RULES: (1) Every text needs a dark rect (fill="#0d0d1e" opacity="0.9") drawn BEFORE the text. (2) All text fill="#ffffff". (3) Min 28px between labels. (4) Labels only in empty margin space. (5) Arial for labels, Georgia for title only. (6) Output raw SVG then <explanation> tag only.';
+      const prompt = buildPrompt(q,sub,vtype,lang,webContext);
+      let raw = '', usedModel = '';
+
+      for(let i=0; i<MODELS.length; i++){
+        const model = MODELS[i];
+        document.getElementById('ld-txt').textContent = i===0 ? 'Drawing your diagram…' : `Switching to ${model}…`;
+        try{
+          const res = await fetch('https://api.groq.com/openai/v1/chat/completions',{
+            method:'POST',
+            headers:{'Content-Type':'application/json','Authorization':'Bearer '+GROQ_KEY},
+            body:JSON.stringify({model, max_tokens:8000, temperature:0.1,
+              messages:[{role:'system',content:sysMsg},{role:'user',content:prompt}]
+            })
+          });
+          if(!res.ok){
+            const e = await res.json().catch(()=>({}));
+            const msg = e.error?.message||'';
+            // Rate limit or overloaded → try next model
+            if(res.status===429||res.status===503||msg.toLowerCase().includes('rate limit')||msg.toLowerCase().includes('limit')){
+              console.warn(`Model ${model} rate limited, trying next…`);
+              continue;
+            }
+            throw new Error(msg||'Groq error '+res.status);
+          }
+          const data = await res.json();
+          raw = data.choices?.[0]?.message?.content||'';
+          usedModel = model;
+          break; // success!
+        }catch(fetchErr){
+          if(i===MODELS.length-1) throw fetchErr;
+          console.warn(`Model ${model} failed:`,fetchErr.message);
+        }
+      }
+
+      if(!raw) throw new Error('All free Groq models are rate limited right now. Your daily limit resets at midnight. Try again in a few minutes, or come back tomorrow for a fresh 100,000 tokens!');
+
+      const cleaned = raw.replace(/```(?:svg|xml|html)?\s*/gi,'').replace(/```/g,'');
+      const svgM = cleaned.match(/<svg[\s\S]*<\/svg>/i);
+      const explM = raw.match(/<explanation>([\s\S]*?)<\/explanation>/i);
+      if(!svgM) throw new Error('No diagram generated. Try rephrasing your question.');
+      lastSVG = fixSVGText(svgM[0]);
+      lastExpl = explM?explM[1].trim():'';
+      document.getElementById('svg-out').innerHTML = lastSVG;
+      document.getElementById('svg-out').style.display = 'block';
+      if(lastExpl){
+        document.getElementById('expl-txt').textContent = lastExpl;
+        document.getElementById('expl-lbl').textContent = t.expl;
+        document.getElementById('expl-card').style.display = 'block';
+      }
+      // Show which model was used
+      const modelBadge = document.getElementById('search-badge');
+      if(usedModel && usedModel!=='llama-3.3-70b-versatile'){
+        const mb = document.createElement('div');
+        mb.style.cssText='display:flex;align-items:center;gap:6px;font-size:11px;color:var(--gold);background:rgba(255,209,102,0.08);border:1px solid rgba(255,209,102,0.2);border-radius:8px;padding:5px 12px;margin-bottom:10px;';
+        mb.innerHTML='⚡ Used fallback model: '+usedModel;
+        document.getElementById('svg-out').before(mb);
+      }
+    }
+
+    // ── STEP 4: Wait for image if still loading ──
+    if(doImage) await hfPromise;
+
+    clearInterval(ldInt);
+    document.getElementById('ld').style.display='none';
+    document.getElementById('res-acts').style.display='flex';
+    document.getElementById('result-sec').scrollIntoView({behavior:'smooth',block:'start'});
+    addHist(q,lastSVG,sub);
+
+  }catch(err){
+    clearInterval(ldInt);
+    document.getElementById('ld').style.display='none';
+    showErr('Error: '+err.message);
+  }finally{
+    btn.disabled=false; btn.classList.remove('loading');
+  }
+}
+
+// ── PROMPT ENGINE ──
+
+// Detect topic category for art + body illustration hints
+function detectTopic(q){
+  const s = q.toLowerCase();
+  if(/respirat|lung|breath|oxygen|co2|inhale|exhale|bronch|alveol|trachea/.test(s)) return 'respiration';
+  if(/heart|cardiac|blood|circulat|vein|artery|pulse|pump/.test(s))               return 'heart';
+  if(/digest|stomach|intestin|liver|pancrea|esophag|gut|bowel/.test(s))           return 'digestion';
+  if(/brain|nervous|neuron|nerve|spinal|reflex/.test(s))                           return 'brain';
+  if(/skeleton|bone|joint|muscl|ligament|fracture/.test(s))                        return 'skeleton';
+  if(/eye|vision|retina|cornea|pupil|optic/.test(s))                               return 'eye';
+  if(/ear|hearing|cochlea|eardrum|sound wave/.test(s))                             return 'ear';
+  if(/kidney|excret|urine|nephron|urinary/.test(s))                                return 'kidney';
+  if(/cell|mitosi|dna|gene|chromosome|nucleus|membran/.test(s))                   return 'cell';
+  if(/plant|photo|leaf|root|stem|chloro|flower/.test(s))                          return 'plant';
+  if(/water.?cycle|rain|evapor|cloud|precipit/.test(s))                           return 'watercycle';
+  if(/food.?chain|ecosys|prey|predator|habitat/.test(s))                          return 'ecosystem';
+  if(/atom|electron|proton|neutron|nuclear|element/.test(s))                      return 'atom';
+  if(/electric|circuit|current|resist|volt|wire/.test(s))                         return 'circuit';
+  if(/force|motion|speed|gravity|newton|friction|velocity|momentum/.test(s))      return 'physics';
+  if(/magnet|pole|field/.test(s))                                                  return 'magnet';
+  if(/light|optic|refract|reflect|lens|prism|spectrum/.test(s))                   return 'light';
+  if(/volcano|earthquake|plate|tectonic|erosion|rock|mineral/.test(s))            return 'geology';
+  if(/solar|planet|orbit|moon|sun|star|galaxy|space|comet/.test(s))               return 'space';
+  if(/history|revolut|war|empire|dynasty|battle|king|independ/.test(s))           return 'history';
+  if(/map|geograph|continen|country|mountain|river|climate/.test(s))              return 'geography';
+  if(/math|algebra|geometr|equation|theorem|fraction|calcul|pythag/.test(s))      return 'math';
+  if(/solve|steps|calculate|find.?x|simplif/.test(s))                             return 'mathsteps';
+  return 'general';
+}
+
+// Return color theme + body illustration instructions per topic
+function getTopicTheme(topic){
+  const themes = {
+    respiration: {
+      bg1:'#0d1b2a', bg2:'#1b263b', accent:'#74b9ff', accent2:'#a29bfe', accent3:'#fd79a8',
+      bodyArt: `HUMAN BODY ILLUSTRATION FOR RESPIRATION:
+Draw a front-facing human torso outline (shoulders to abdomen) centered at x=450, y=200 to y=580:
+- Neck: rect x=420 y=145 w=60 h=50 rx=8 fill="#f4a261" opacity="0.9"
+- Shoulders: path d="M320 195 Q370 175 450 170 Q530 175 580 195 L590 240 Q530 225 450 220 Q370 225 310 240 Z" fill="#f4a261" opacity="0.85"
+- Torso outline: path d="M310 240 Q290 300 285 380 Q283 440 295 510 Q320 545 370 555 L530 555 Q580 545 605 510 Q617 440 615 380 Q610 300 590 240 Z" fill="#f4a261" opacity="0.8" stroke="#e17055" stroke-width="2"
+- Ribcage: 6 pairs of curved ribs as <path> arcs inside torso, fill=none stroke="#e17055" stroke-width="1.5" opacity="0.6"
+  Ribs at y=260,290,320,350,380,410 curving from spine (x=450) outward
+- TRACHEA: rect x=435 y=150 w=30 h=80 rx=8 fill="#74b9ff" stroke="#0984e3" stroke-width="2" — labeled "Trachea"
+- BRONCHI: Two paths branching from trachea at y=230:
+  Left bronchus: path d="M445 230 Q400 250 360 270" stroke="#74b9ff" stroke-width="8" fill=none stroke-linecap="round"
+  Right bronchus: path d="M455 230 Q500 250 540 270" stroke="#74b9ff" stroke-width="8" fill=none stroke-linecap="round"
+- LEFT LUNG: Large organic shape path d="M280 270 Q260 320 255 380 Q258 440 290 480 Q330 510 380 505 Q420 498 440 460 Q450 420 448 370 Q445 300 430 265 Q410 240 375 238 Q320 238 280 270 Z" fill="#ff7675" opacity="0.75" stroke="#d63031" stroke-width="2" filter="url(#sh)"
+- RIGHT LUNG: path d="M460 265 Q460 300 462 370 Q460 420 470 460 Q490 498 530 505 Q570 510 610 480 Q642 440 645 380 Q640 320 620 270 Q580 238 525 238 Q480 240 460 265 Z" fill="#e17055" opacity="0.75" stroke="#c0392b" stroke-width="2" filter="url(#sh)"
+- Lung texture lines (bronchioles): fine curved paths inside each lung, stroke="#fab1a0" stroke-width="0.8" opacity="0.6"
+- DIAPHRAGM: Large curved path at bottom of lungs, fill="#fdcb6e" stroke="#f39c12" stroke-width="2" opacity="0.8" — labeled "Diaphragm"
+- O2 arrows: green arrows pointing INTO lungs labeled "O₂ in"
+- CO2 arrows: red arrows pointing OUT of lungs labeled "CO₂ out"
+Labels (use callout style — circle dot + dashed line + rounded rect badge):
+  "Nasal cavity" top, "Trachea" center-top, "Left Lung" left, "Right Lung" right,
+  "Bronchioles" inside lungs, "Alveoli" with small cluster of circles, "Diaphragm" bottom`,
+    },
+
+    heart: {
+      bg1:'#1a0a0a', bg2:'#3d1515', accent:'#ff7675', accent2:'#fd79a8', accent3:'#fdcb6e',
+      bodyArt: `HUMAN HEART CROSS-SECTION ILLUSTRATION:
+Draw anatomically styled heart centered at x=450, y=320, size about 220x200:
+- Heart outline: path d="M450 200 Q520 160 560 200 Q600 240 600 290 Q600 360 520 420 Q480 450 450 470 Q420 450 380 420 Q300 360 300 290 Q300 240 340 200 Q380 160 450 200 Z" fill="#c0392b" stroke="#e74c3c" stroke-width="3" filter="url(#sh)"
+- Left atrium (top-left): ellipse cx=395 cy=255 rx=55 ry=42 fill="#e74c3c" stroke="#c0392b" stroke-width="2"
+- Right atrium (top-right): ellipse cx=505 cy=255 rx=55 ry=42 fill="#e17055" stroke="#d35400" stroke-width="2"
+- Left ventricle (bottom-left, larger): path roughly bottom-left quadrant fill="#ff7675"
+- Right ventricle (bottom-right): path roughly bottom-right quadrant fill="#fab1a0"
+- Septum: vertical line x=450 from y=240 to y=440 stroke="#922b21" stroke-width="4"
+- Aorta: large arch at top fill="#e74c3c" — "Aorta" label
+- Pulmonary artery: arch top-right fill="#74b9ff" — "Pulmonary Artery" label
+- Vena cava: large vein entering top and bottom — "Vena Cava" label
+- Blood flow arrows in RED (#e74c3c) and BLUE (#74b9ff) showing circulation direction
+- Heart muscle texture: thin curved lines inside heart walls`,
+    },
+
+    digestion: {
+      bg1:'#1a0f00', bg2:'#2d1b00', accent:'#fdcb6e', accent2:'#fd79a8', accent3:'#55efc4',
+      bodyArt: `HUMAN DIGESTIVE SYSTEM ILLUSTRATION:
+Draw full digestive tract as a continuous illustrated pathway, centered in the canvas:
+- Head outline (simple): ellipse cx=450 cy=110 rx=50 ry=60 fill="#f4a261" opacity="0.8"
+  Mouth opening: small ellipse at bottom of head
+- Esophagus: thick vertical path/rect from mouth down to stomach, fill="#fdcb6e" stroke="#f39c12" stroke-width="2"
+- Stomach: large J-shaped or bean-shaped path at center-left, fill="#fd79a8" stroke="#e84393" stroke-width="2.5" filter="url(#sh)"
+  Interior folds: curved lines inside stomach
+- Small intestine: COILED path taking up center area — long winding coil 6-8 loops, fill="none" stroke="#55efc4" stroke-width="14" opacity="0.8"
+  Inner path same coil stroke="#006266" stroke-width="4"
+- Large intestine: FRAME around small intestine — thick path going up right side, across top, down left side, fill="none" stroke="#a29bfe" stroke-width="18" opacity="0.7"
+- Liver: large brown shape top-right: fill="#8d5524" opacity="0.85"
+- Pancreas: elongated shape behind stomach: fill="#fdcb6e" opacity="0.7"
+- Gallbladder: small pear shape under liver: fill="#27ae60" opacity="0.8"
+- Rectum + anus at bottom: fill="#e17055"
+All major parts labeled with callout lines`,
+    },
+
+    brain: {
+      bg1:'#0d0d2b', bg2:'#1a1a4e', accent:'#a29bfe', accent2:'#74b9ff', accent3:'#fd79a8',
+      bodyArt: `HUMAN BRAIN ILLUSTRATION:
+Draw a detailed side-view (lateral) brain cross-section centered at x=450, y=320:
+- Outer cerebrum: large organic blob shape with characteristic FOLDED surface (gyri and sulci)
+  Use complex path with many curves to show brain folds
+  fill="#fd79a8" opacity="0.85" stroke="#d63031" stroke-width="2" filter="url(#sh)"
+- Draw 8-10 sulcus lines (grooves): curved paths inside cerebrum stroke="#c0392b" stroke-width="2" fill=none
+- Frontal lobe region: tinted slightly different shade, labeled "Frontal Lobe"
+- Parietal lobe: labeled "Parietal Lobe"  
+- Temporal lobe (lower area): labeled "Temporal Lobe"
+- Occipital lobe (back): labeled "Occipital Lobe"
+- Cerebellum (back-bottom): smaller rounded structure with fine parallel lines fill="#a29bfe"
+- Brain stem: thick vertical path at bottom fill="#74b9ff"
+- Corpus callosum: curved band connecting hemispheres
+- Labels for each lobe with function: "Thinking", "Sensing", "Hearing", "Vision"`,
+    },
+
+    cell: {
+      bg1:'#0a1628', bg2:'#0f2044', accent:'#55efc4', accent2:'#74b9ff', accent3:'#fd79a8',
+      bodyArt: `ANIMAL/PLANT CELL ILLUSTRATION:
+Draw a large detailed cell cross-section centered at x=450, y=320, radius~200:
+- Cell membrane: large ellipse rx=220 ry=180 fill="#0984e3" opacity="0.15" stroke="#74b9ff" stroke-width="3" stroke-dasharray="8,4"
+- Nucleus: ellipse cx=430 cy=300 rx=65 ry=55 fill="#6c5ce7" opacity="0.8" stroke="#a29bfe" stroke-width="2.5"
+  Nuclear envelope: same ellipse slightly larger, dashed stroke
+  Nucleolus: small circle inside nucleus fill="#fd79a8"
+- Mitochondria: 3-4 oval shapes with inner folds (cristae lines) scattered around cell fill="#fdcb6e" stroke="#f39c12"
+- Endoplasmic reticulum: wavy/folded path system fill=none stroke="#55efc4" stroke-width="2"
+- Golgi apparatus: stack of 4-5 curved parallel paths (like flattened sacs) fill="#fd79a8" opacity="0.7"
+- Ribosomes: many tiny circles (r=4) dotted around fill="#fab1a0"
+- Vacuole: medium oval fill="#74b9ff" opacity="0.3" stroke="#0984e3"
+- Lysosome: small circles fill="#e17055" opacity="0.7"
+All organelles labeled with callout lines`,
+    },
+
+    plant: {
+      bg1:'#0a1f0a', bg2:'#1a3a1a', accent:'#55efc4', accent2:'#fdcb6e', accent3:'#74b9ff',
+      bodyArt: `PLANT CROSS-SECTION / PHOTOSYNTHESIS ILLUSTRATION:
+Draw a detailed plant showing internal structure:
+- Leaf cross-section (main): large horizontal oval/rect at top showing layers:
+  Upper epidermis: thin rect fill="#27ae60"
+  Palisade mesophyll: cells with chloroplasts (small green ovals inside cells) fill="#2ecc71"
+  Spongy mesophyll: irregular cells with air spaces fill="#a9dfbf"
+  Lower epidermis: thin rect fill="#27ae60"
+  Stomata: opening at bottom with guard cells (two kidney-shaped cells) fill="#1e8449"
+- Stem cross-section circle at bottom left showing vascular bundles (xylem + phloem)
+- Root tip at very bottom showing root hair cells
+- Sun (circle + rays) at top right shining on leaf
+- CO2 arrows entering through stomata
+- O2 arrows exiting through stomata  
+- H2O arrows going up through xylem
+- Glucose being produced in chloroplasts (label)`,
+    },
+
+    watercycle: {
+      bg1:'#0a2a4a', bg2:'#1a4060', accent:'#74b9ff', accent2:'#55efc4', accent3:'#fdcb6e',
+      bodyArt: `WATER CYCLE LANDSCAPE ILLUSTRATION:
+Draw a complete landscape scene showing water cycle:
+- Sky gradient background (already in bg)
+- SUN: circle cx=780 cy=110 r=50 fill="#fdcb6e" with 12 radiating lines
+- CLOUDS: 3 fluffy clouds using overlapping ellipses, fill="#ecf0f1" — one dark rain cloud fill="#636e72"
+- MOUNTAIN: large triangle/polygon on left side fill="#636e72" with snow cap (white top)
+- OCEAN/LAKE: wavy shape at bottom fill="#0984e3" with wave lines
+- RIVER: path flowing from mountain to ocean fill="#74b9ff"
+- TREES: simple tree shapes (triangle + rectangle) on mountain slopes fill="#27ae60"
+- CITY/LAND: flat area with simple building outlines
+WATER CYCLE ARROWS (thick colored):
+- EVAPORATION: upward curved arrows from ocean to sky, fill="#74b9ff" label="Evaporation"
+- TRANSPIRATION: small arrows rising from trees
+- CONDENSATION: label in cloud area
+- PRECIPITATION: blue downward lines from rain cloud
+- SURFACE RUNOFF: arrow from mountain to ocean
+- GROUNDWATER: arrow going underground (dashed)
+- INFILTRATION: downward arrow into ground`,
+    },
+
+    space: {
+      bg1:'#000010', bg2:'#000828', accent:'#fdcb6e', accent2:'#74b9ff', accent3:'#a29bfe',
+      bodyArt: `SOLAR SYSTEM / SPACE ILLUSTRATION:
+Draw the solar system or space topic:
+- Star field: 30+ small white/yellow circles of varying sizes scattered as background
+- SUN: large circle cx=150 cy=310 r=80 fill="#fdcb6e" with corona (radial lines + glow filter)
+- Orbital paths: concentric ellipses around sun (dashed, faint)
+- PLANETS with accurate relative colors:
+  Mercury: small gray circle on closest orbit
+  Venus: yellow-orange circle
+  Earth: blue-green circle with continent shapes
+  Mars: red circle with polar cap
+  Jupiter: large circle with horizontal bands (orange, brown, cream)
+  Saturn: large circle with rings (tilted ellipses around it)
+  Uranus: teal circle
+  Neptune: deep blue circle
+- Labels for each planet
+- Moon orbiting Earth
+- Asteroid belt: dots between Mars and Jupiter`,
+    },
+
+    math: {
+      bg1:'#1a0a2e', bg2:'#2d1b4e', accent:'#a29bfe', accent2:'#fdcb6e', accent3:'#55efc4',
+      bodyArt: `MATHEMATICAL VISUAL ILLUSTRATION:
+Create a beautiful mathematical diagram with:
+- Grid/graph paper background: fine lines fill="none" stroke="#a29bfe" stroke-width="0.4" opacity="0.2"
+- X and Y axes: thick lines with arrows at ends, labeled
+- The actual geometric shape or equation being asked about — drawn accurately
+- For geometry: draw the shape with ALL dimensions labeled (angles, sides, areas)
+- For algebra: show the equation graphed as a curve/line on the coordinate system
+- Number line if relevant
+- All measurements, angles, and values clearly labeled
+- Step annotations showing key measurements
+- Use color to distinguish different parts (each side/angle a different color)
+- Background math symbols: large faint π, ∑, √, ∞ as decorative elements`,
+    },
+
+    mathsteps: {
+      bg1:'#1a0a2e', bg2:'#2d1b4e', accent:'#a29bfe', accent2:'#fdcb6e', accent3:'#55efc4',
+      bodyArt: `STEP-BY-STEP MATH SOLUTION VISUAL:
+Show the complete mathematical working:
+- Large equation display at top in a highlighted box
+- Each step on its own line with clear numbering
+- Show what operation was performed at each step (in smaller text beside it)
+- Box/highlight the final answer
+- If geometry: draw the shape alongside the calculation
+- Use color coding: original equation in one color, each manipulation in another
+- Check/verify step at the end`,
+    },
+
+    history: {
+      bg1:'#2d1b00', bg2:'#4a2f00', accent:'#f39c12', accent2:'#e74c3c', accent3:'#9b59b6',
+      bodyArt: `HISTORICAL TIMELINE / MAP ILLUSTRATION:
+Draw historically themed visuals:
+- Aged parchment texture: diagonal cross-hatch lines pattern over background
+- Decorative border frame: ornate corner elements using paths
+- Compass rose: 8-pointed star in corner with N/S/E/W labels
+- Map elements if geography related: simplified continent/country outlines
+- Crown/shield decorative elements for monarchy topics
+- Sword/quill decorative elements for war/literature topics
+- Scroll banner for title area
+- Dates and events on a decorated timeline spine`,
+    },
+
+    geography: {
+      bg1:'#0a2040', bg2:'#0f3060', accent:'#74b9ff', accent2:'#55efc4', accent3:'#fdcb6e',
+      bodyArt: `GEOGRAPHICAL ILLUSTRATION:
+Draw geographical features relevant to the topic:
+- For physical geography: cross-section of land showing mountains, valleys, rivers, ocean floor
+- For climate: globe with climate zones colored differently
+- For maps: simplified outline of relevant countries/continents with labels
+- Compass rose in corner
+- Altitude/depth scale if relevant
+- Water bodies in blue, mountains in brown/gray, forests in green, deserts in yellow
+- Legend/key for any colors used`,
+    },
+
+    atom: {
+      bg1:'#000a1e', bg2:'#001a3e', accent:'#74b9ff', accent2:'#fdcb6e', accent3:'#55efc4',
+      bodyArt: `ATOMIC STRUCTURE ILLUSTRATION:
+Draw a detailed atom model:
+- Nucleus at center: cluster of PROTONS (red circles) and NEUTRONS (gray circles) tightly packed
+  Use circle packing — each proton labeled p+ and neutron labeled n⁰
+- Electron shells as concentric ellipses/circles around nucleus
+  First shell: 2 electrons (small blue circles)
+  Second shell: up to 8 electrons
+  Third shell: up to 18 electrons
+- Electrons: small colored circles on the orbital paths with motion blur suggestion
+- Orbital labels: 1s, 2s, 2p etc if relevant
+- Energy level arrows showing transitions
+- Element name and atomic number prominently displayed
+- Glow effect on nucleus using filter`,
+    },
+
+    circuit: {
+      bg1:'#0a0a1e', bg2:'#0f0f2e', accent:'#55efc4', accent2:'#fdcb6e', accent3:'#ff7675',
+      bodyArt: `ELECTRICAL CIRCUIT DIAGRAM:
+Draw a proper circuit diagram using standard symbols:
+- Use a clean grid-based layout
+- Battery: two parallel lines (long+short) with +/- labels
+- Wires: straight horizontal/vertical lines with right-angle corners
+- Bulb/lamp: circle with X or filament inside
+- Switch: gap with angled line
+- Resistor: zigzag line or rectangle
+- Current flow arrows along wires
+- Voltage/current values labeled at components
+- Color code: red wires for positive, blue for negative (or conventional current direction)
+- Ammeter and voltmeter symbols if relevant
+- All components clearly labeled`,
+    },
+
+    general: {
+      bg1:'#1a1a2e', bg2:'#16213e', accent:'#a29bfe', accent2:'#fd79a8', accent3:'#55efc4',
+      bodyArt: `ILLUSTRATED EDUCATIONAL DIAGRAM:
+Draw a rich visual representation of the topic using:
+- Central large illustration of the main concept using shapes, paths, and colors
+- Supporting smaller illustrations or icons for related concepts
+- Decorative geometric elements in corners (hexagons, stars, diamonds)
+- Connecting lines and arrows showing relationships
+- Color-coded sections for different categories
+- Rich labels for every visual element`,
+    },
+  };
+  return themes[topic] || themes.general;
+}
+
+function buildPrompt(q, sub, type, lang, webContext="") {
+  const topic = detectTopic(q);
+  const theme = getTopicTheme(topic);
+  const langNote = lang === 'hi'
+    ? 'Write ALL SVG text labels in ENGLISH only. Write the <explanation> in simple Hindi.'
+    : 'Write everything in English.';
+
+  const isBioAnatomy = ['respiration','heart','digestion','brain','skeleton','eye','ear','kidney','cell'].includes(topic);
+
+  const typeSection = type === 'steps' ? `
+LAYOUT: STEP-BY-STEP FLOW
+- Create 4-5 numbered step cards arranged vertically (or in L-shape if many steps)
+- Each card = outer rect rx=14 (full card) + inner header rect (top 36px, gradient fill) + body area
+- Header: gradient fill using g1/g2/g3, white bold text "Step N: [title]"
+- Body: fill="#1e2a3a" (dark), light colored text with the actual step content
+- Circular badge LEFT of header: circle r=20, gradient fill, white number bold 18px
+- Arrow between cards: filled polygon pointing DOWN (▼), colored, height=30
+- Last card: gold border stroke="#f1c40f" stroke-width="3", "✓ Answer: [result]" in bold
+- Each step a DIFFERENT color: use g1, g2, g3 and custom gradients` :
+  type === 'concept' ? `
+LAYOUT: CONCEPT MAP
+- Center: large hexagon or ellipse (rx=100 ry=60) gradient fill, topic in WHITE bold 20px
+- 5-6 curved bezier branch lines from center to surrounding boxes
+- Each branch box: rect rx=14, different gradient color, bold label + description
+- Small diamond/circle decoration at midpoint of each branch line
+- Each branch a completely DIFFERENT vibrant color` :
+  type === 'timeline' ? `
+LAYOUT: DECORATED TIMELINE
+- Horizontal spine: thick rect y=305 height=8 gradient fill, full width
+- 5-6 events alternating ABOVE (y=150-280) and BELOW (y=340-490) spine
+- Each event: large filled circle on spine + vertical line connector + card (rect rx=12)
+- Card: colored header (gradient, date/year white bold) + dark body (description)
+- Each event DIFFERENT color
+- End arrow: polygon pointing right, labeled "Present →"
+- Small icon shapes (star, circle, diamond) mark each event on spine` :
+  type === 'cycle' ? `
+LAYOUT: CIRCULAR CYCLE
+- 4-5 stages arranged in TRUE CIRCLE. CALCULATE POSITIONS:
+  N=number of stages. For stage i (0-based):
+  angle = (i/N * 2 * Math.PI) - Math.PI/2
+  cx = 450 + 195 * Math.cos(angle)
+  cy = 335 + 175 * Math.sin(angle)
+- Each stage: rect rx=14 centered at cx,cy, width=150 height=70, different gradient
+- Stage title bold 14px + description 11px inside
+- Center circle r=70 gradient fill, cycle name white bold 16px
+- Curved arc arrows between consecutive stages — use SVG arc paths
+- Each stage completely DIFFERENT color` :
+  `LAYOUT: ILLUSTRATED DIAGRAM
+${isBioAnatomy
+  ? `THIS IS A BIOLOGY/ANATOMY TOPIC — you MUST draw the actual human body structure as described in the artwork section below. The illustration should be the MAIN focus (60-70% of the canvas). Labels with callout lines point to each anatomical part.`
+  : `Draw the actual subject as a REAL visual illustration. Use paths, ellipses, circles, polygons to depict the real thing — not generic boxes. The main illustration takes 60% of canvas space. Labeled callouts (dot + dashed line + badge) point to each part.`
+}`;
+
+  return `You are Chitraa AI — the world's best SVG educational diagram artist making poster-quality diagrams for Indian school students. Every diagram must be stunning, accurate, and beautiful enough to print and hang on a wall.
+
+TOPIC: "${q}"
+SUBJECT: ${sub} | LAYOUT TYPE: ${type}
+${langNote}
+${webContext ? '\n━━━ LIVE WEB DATA (use for accuracy) ━━━\n'+webContext+'\n' : ''}
+━━━ STRICT OUTPUT ━━━
+Output ONLY: raw SVG starting with <svg ... then </svg>
+Then immediately: <explanation>3 friendly sentences for a student about "${q}".</explanation>
+ZERO other text. NO markdown. NO code fences. NO preamble.
+
+━━━ SVG CANVAS ━━━
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 620">
+
+━━━ REQUIRED DEFS (copy exactly, fill in colors) ━━━
+<defs>
+<linearGradient id="bgG" x1="0" y1="0" x2="0.5" y2="1"><stop offset="0%" stop-color="${theme.bg1}"/><stop offset="100%" stop-color="${theme.bg2}"/></linearGradient>
+<linearGradient id="g1" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="${theme.accent}"/><stop offset="100%" stop-color="${theme.accent2}"/></linearGradient>
+<linearGradient id="g2" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="${theme.accent2}"/><stop offset="100%" stop-color="${theme.accent3}"/></linearGradient>
+<linearGradient id="g3" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="${theme.accent3}"/><stop offset="100%" stop-color="${theme.accent}"/></linearGradient>
+<linearGradient id="g4" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="${theme.accent}"/><stop offset="100%" stop-color="${theme.accent3}"/></linearGradient>
+<linearGradient id="titleG" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="${theme.accent}" stop-opacity="0.9"/><stop offset="100%" stop-color="${theme.accent2}" stop-opacity="0.7"/></linearGradient>
+<filter id="sh"><feDropShadow dx="2" dy="3" stdDeviation="4" flood-color="#000" flood-opacity="0.3"/></filter>
+<filter id="glow"><feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+<marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,1 L9,5 L0,9 Z" fill="${theme.accent}"/></marker>
+<marker id="arr2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,1 L9,5 L0,9 Z" fill="${theme.accent2}"/></marker>
+<marker id="arr3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,1 L9,5 L0,9 Z" fill="${theme.accent3}"/></marker>
+</defs>
+
+━━━ REQUIRED STRUCTURE ━━━
+1. <rect width="900" height="620" fill="url(#bgG)"/>
+
+2. TOPIC ARTWORK — Draw these SPECIFIC decorative elements for this topic:
+${theme.bodyArt}
+
+3. TITLE BAR:
+<rect x="0" y="0" width="900" height="58" fill="${theme.bg1}" opacity="0.92"/>
+<rect x="0" y="55" width="900" height="3" fill="url(#titleG)"/>
+<text x="450" y="35" font-family="Georgia,serif" font-size="26" font-weight="bold" fill="#ffffff" text-anchor="middle">[WRITE THE ACTUAL TOPIC TITLE HERE]</text>
+<text x="450" y="52" font-family="Arial,sans-serif" font-size="11" fill="${theme.accent}" text-anchor="middle" opacity="0.85">[subject] · [diagram type] · Chitraa AI</text>
+
+4. MAIN DIAGRAM (y=65 to y=600):
+${typeSection}
+
+5. FOOTER:
+<rect x="0" y="602" width="900" height="18" fill="${theme.bg1}" opacity="0.85"/>
+<text x="450" y="614" font-family="Arial,sans-serif" font-size="9" fill="${theme.accent}" text-anchor="middle" opacity="0.7">Chitraa AI · By Munish Mishra</text>
+
+━━━ TEXT VISIBILITY RULES — MOST IMPORTANT ━━━
+RULE 1 — EVERY text needs a solid background pill behind it:
+  WRONG: <text fill="white" x="200" y="300">Label</text>  ← invisible if bg is light
+  RIGHT: <rect x="165" y="286" width="70" height="22" rx="11" fill="#1a1a2e" opacity="0.92"/>
+         <text fill="#ffffff" x="200" y="301" text-anchor="middle" font-size="13">Label</text>
+
+RULE 2 — NEVER put text directly on a gradient or illustration:
+  Every single label MUST have its own dark pill/badge behind it before the text.
+  Pill color: always use a DARK solid color (#1a1a2e or #000000 at opacity 0.85+)
+  Text color on dark pill: always #ffffff
+  This applies to ALL text — titles, labels, callouts, step text, everything.
+
+RULE 3 — NO TEXT OVERLAP:
+  Before placing any text, check it does not cross another text or shape.
+  Space labels at least 28px apart vertically, 20px apart horizontally.
+  If space is tight — use fewer labels, make them shorter, or move them outside.
+
+RULE 4 — CALLOUT LABEL PATTERN (use for all diagram part labels):
+  Step 1: Place a small filled circle at the point on the illustration: <circle r="4" fill="${theme.accent}"/>
+  Step 2: Draw a line from that point to empty space: <line stroke="${theme.accent}" stroke-width="1.5" stroke-dasharray="4,3"/>
+  Step 3: Draw a dark pill at the end: <rect rx="10" fill="#0d0d1e" opacity="0.92" stroke="${theme.accent}" stroke-width="1"/>
+  Step 4: Text inside pill: <text fill="#ffffff" font-size="12" font-family="Arial,sans-serif">Label</text>
+  ALWAYS put callout labels in EMPTY SPACE — never over the illustration.
+
+RULE 5 — COLOR CONTRAST:
+  Dark background (bg1 = ${theme.bg1}) → text fill="#ffffff"
+  Any colored shape fill → ALWAYS draw a dark rect behind text first
+  Never use light colored text (yellow, light blue) directly on light areas
+  Never use dark text on dark shapes
+
+RULE 6 — LAYOUT SPACING:
+  Plan positions BEFORE drawing. Divide canvas into zones:
+  - Title zone: y=0 to y=62
+  - Main illustration: center of canvas, max 500x440 area
+  - Label zone: margins (x=10-120 left, x=760-890 right, y=65-590 top/bottom)
+  - Footer: y=600 to y=620
+  Keep ALL content x=12 to x=888, y=65 to y=598. Nothing outside these bounds.
+
+━━━ STYLE RULES ━━━
+• All boxes: rx=12, gradient fill (url(#g1) url(#g2) url(#g3)), filter="url(#sh)"
+• Font: Georgia for title only. Arial,sans-serif for ALL other text.
+• Sizes: Title=24px, section headers=14px bold, body/labels=13px, minimum=12px
+• Strokes: stroke="${theme.accent}" stroke-width="1.5" on all shapes
+• Colors: use ${theme.accent}, ${theme.accent2}, ${theme.accent3} throughout
+
+━━━ ACCURACY MANDATE ━━━
+Diagram is for real students learning "${q}".
+• Facts must be correct — use the live web data above
+• Show all key components clearly labeled
+• Make it the best diagram of "${q}" a student could find`;
+}
+
+// ── SVG TEXT FIXER — auto-fixes text visibility & overlap ──
+function fixSVGText(svgStr) {
+  // Parse SVG into DOM
+  const parser = new DOMParser();
+  const doc = parser.parseFromString(svgStr, 'image/svg+xml');
+  const svg = doc.querySelector('svg');
+  if (!svg) return svgStr;
+
+  const ns = 'http://www.w3.org/2000/svg';
+  const textEls = svg.querySelectorAll('text');
+
+  textEls.forEach(txt => {
+    const fill = txt.getAttribute('fill') || '';
+    const x = parseFloat(txt.getAttribute('x') || 0);
+    const y = parseFloat(txt.getAttribute('y') || 0);
+    const anchor = txt.getAttribute('text-anchor') || 'start';
+    const fontSize = parseFloat(txt.getAttribute('font-size') || 13);
+    const content = txt.textContent.trim();
+    if (!content) return;
+
+    // Estimate text width
+    const charW = fontSize * 0.6;
+    const textW = content.length * charW;
+    const textH = fontSize + 6;
+
+    // Calculate pill position based on anchor
+    let pillX = x;
+    if (anchor === 'middle') pillX = x - textW / 2 - 8;
+    else if (anchor === 'end') pillX = x - textW - 8;
+    else pillX = x - 8;
+    const pillY = y - textH + 2;
+    const pillW = textW + 16;
+
+    // Check if there's already a rect immediately before this text
+    const prev = txt.previousElementSibling;
+    const alreadyHasBg = prev && prev.tagName === 'rect' &&
+      Math.abs(parseFloat(prev.getAttribute('y') || 0) - pillY) < 10;
+
+    if (!alreadyHasBg) {
+      // Inject a dark pill background
+      const pill = doc.createElementNS(ns, 'rect');
+      pill.setAttribute('x', pillX);
+      pill.setAttribute('y', pillY);
+      pill.setAttribute('width', pillW);
+      pill.setAttribute('height', textH);
+      pill.setAttribute('rx', '8');
+      pill.setAttribute('fill', '#0a0a1a');
+      pill.setAttribute('opacity', '0.88');
+      txt.parentNode.insertBefore(pill, txt);
+    }
+
+    // Force white text fill if it looks bad
+    const badFills = ['', 'none', 'inherit', 'transparent'];
+    const lightColors = ['#fff', '#ffffff', 'white', '#f', '#e', '#d', '#c', '#b', '#a', '#9', '#fd', '#fe', '#ff', '#fa', '#fb', '#fc'];
+    const isBadFill = badFills.includes(fill.toLowerCase()) ||
+      fill.toLowerCase().startsWith('#f') ||
+      fill.toLowerCase().startsWith('#e') ||
+      fill === 'yellow' || fill === 'lime' || fill === 'cyan';
+
+    // Just always set white — we guaranteed a dark pill behind it
+    txt.setAttribute('fill', '#ffffff');
+    txt.setAttribute('font-family', txt.getAttribute('font-family') || 'Arial,sans-serif');
+
+    // Enforce minimum font size
+    if (fontSize < 12) txt.setAttribute('font-size', '12');
+  });
+
+  // Serialize back
+  return new XMLSerializer().serializeToString(svg);
+}
+
+// ── HISTORY ──
+function addHist(q,svg,s){
+  hist.unshift({q,svg,s});
+  if(hist.length>8)hist.pop();
+  renderHist();
+}
+function renderHist(){
+  const sec=document.getElementById('hist-sec');
+  const grid=document.getElementById('hist-grid');
+  if(!hist.length){sec.style.display='none';return}
+  sec.style.display='block';
+  document.getElementById('hist-lbl').textContent=T[lang].histL;
+  grid.innerHTML=hist.map((item,i)=>`
+    <div class="hc" onclick="loadHist(${i})">
+      <div class="hc-thumb">${item.imgUrl?`<img src="${item.imgUrl}" style="width:100%;height:100%;object-fit:cover;border-radius:8px" loading="lazy"/>`:item.svg?item.svg:'<div class="no-svg">🖼️</div>'}</div>
+      <div class="hc-q">${item.q}</div>
+      <div class="hc-meta">
+        <div class="hc-dot" style="background:${subColor(item.s)}"></div>
+        ${subLabel(item.s)}
+      </div>
+    </div>`).join('');
+}
+function loadHist(i){
+  const item=hist[i];
+  document.getElementById('q').value=item.q;
+  autoR(document.getElementById('q'));
+  if(item.svg){document.getElementById('svg-out').innerHTML=item.svg;document.getElementById('svg-out').style.display='block';}document.getElementById('result-sec').style.display='block';document.getElementById('res-title').textContent=item.q;document.getElementById('res-acts').style.display='flex';document.getElementById('ld').style.display='none';document.getElementById('expl-card').style.display='none';lastSVG=item.svg||''; lastQ=item.q;
+}
+
+// ── DOWNLOAD ──
+function dlHFImg(){
+  if(!lastHFImg)return;
+  const a=document.createElement('a');
+  a.href=lastHFImg;
+  a.download='chitraa-'+lastQ.slice(0,30).replace(/\s+/g,'-')+'.jpg';
+  a.click();
+}
+function dlSVG(){
+  if(!lastSVG)return;
+  const a=document.createElement('a');
+  a.href='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(lastSVG);
+  a.download='chitraa-'+lastQ.slice(0,30).replace(/\s+/g,'-')+'.svg';
+  a.click();
+}
+function dlPNG(){
+  const svgEl=document.querySelector('#svg-out svg');
+  if(!svgEl)return;
+  const svgData=new XMLSerializer().serializeToString(svgEl);
+  const canvas=document.createElement('canvas');
+  const scale=2;
+  canvas.width=900*scale; canvas.height=620*scale;
+  const ctx=canvas.getContext('2d');
+  ctx.fillStyle='#ffffff'; ctx.fillRect(0,0,canvas.width,canvas.height);
+  const img=new Image();
+  img.onload=()=>{
+    ctx.drawImage(img,0,0,canvas.width,canvas.height);
+    const a=document.createElement('a');
+    a.href=canvas.toDataURL('image/png');
+    a.download='chitraa-'+lastQ.slice(0,30).replace(/\s+/g,'-')+'.png';
+    a.click();
+  };
+  img.src='data:image/svg+xml;base64,'+btoa(unescape(encodeURIComponent(svgData)));
+}
+
+function regen(){if(lastQ)generate()}
+function followUp(){
+  const q=prompt('Ask a follow-up question:');
+  if(q){document.getElementById('q').value=q;autoR(document.getElementById('q'));generate()}
+}
+
+// ── ERRORS ──
+function showErr(m){const b=document.getElementById('err-box');b.innerHTML=m;b.style.display='block'}
+function clearErr(){document.getElementById('err-box').style.display='none'}
+
+// ── VOICE ──
+function toggleMic(){
+  if(!('webkitSpeechRecognition'in window||'SpeechRecognition'in window)){showErr('Voice input needs Chrome browser.');return}
+  if(isRec){recog?.stop();isRec=false;document.getElementById('mic-btn').classList.remove('rec');return}
+  const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+  recog=new SR();
+  recog.lang=lang==='hi'?'hi-IN':'en-IN';
+  recog.onresult=e=>{
+    document.getElementById('q').value=e.results[0][0].transcript;
+    autoR(document.getElementById('q'));
+    isRec=false; document.getElementById('mic-btn').classList.remove('rec');
+  };
+  recog.onerror=()=>{isRec=false;document.getElementById('mic-btn').classList.remove('rec')};
+  recog.start(); isRec=true; document.getElementById('mic-btn').classList.add('rec');
+}
+
+// ── ENTER KEY ──
+document.getElementById('q').addEventListener('keydown',e=>{
+  if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();generate()}
+});
+
+// ── INIT ──
+updateKeyStatus();
+</script>
+</body>
+</html>

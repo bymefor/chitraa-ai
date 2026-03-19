@@ -1,0 +1,8 @@
+{
+  "name": "chitraa-ai",
+  "version": "1.0.0",
+  "description": "Chitraa AI - Educational Diagram Generator by Munish Mishra",
+  "engines": {
+    "node": "18.x"
+  }
+}
